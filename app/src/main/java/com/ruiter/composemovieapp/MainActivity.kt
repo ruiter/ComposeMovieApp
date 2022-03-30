@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ruiter.composemovieapp.navigation.MovieNavigation
 import com.ruiter.composemovieapp.ui.theme.ComposeMovieAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -24,7 +25,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyApp {
-                MainContent()
+                MovieNavigation()
             }
         }
     }
@@ -33,40 +34,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MyApp(content: @Composable () -> Unit) {
     ComposeMovieAppTheme {
-        Scaffold(topBar = {
-            TopAppBar(backgroundColor = Color.Magenta, elevation = 5.dp) {
-                Text(text = "Movies")
-            }
-        }) {
-            content()
-        }
-    }
-}
-
-@Composable
-fun MainContent(
-    movieList: List<String> = listOf(
-        "Avatar",
-        "300",
-        "Matrix",
-        "Star wars",
-        "Avangers",
-        "Iron Man",
-        "Altered Carbon",
-        "Spider Man",
-        "Captain America",
-        "Harry Potter",
-        "Life"
-    )
-) {
-    Column() {
-        LazyColumn {
-            items(items = movieList) {
-                MovieRow(movie = it) { movie ->
-                    Log.i("ruiter", "MainContent: $movie")
-                }
-            }
-        }
+        content()
     }
 }
 
@@ -104,6 +72,6 @@ fun MovieRow(movie: String, onItemClick: (String) -> Unit) {
 @Composable
 fun DefaultPreview() {
     MyApp {
-        MainContent()
+        MovieNavigation()
     }
 }
