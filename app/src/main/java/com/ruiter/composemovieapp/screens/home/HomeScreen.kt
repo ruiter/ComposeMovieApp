@@ -17,7 +17,7 @@ import com.ruiter.composemovieapp.navigation.MovieScreens
 @Composable
 fun HomeScreen(navController: NavController) {
     Scaffold(topBar = {
-        TopAppBar(backgroundColor = Color.LightGray, elevation = 5.dp) {
+        TopAppBar(backgroundColor = Color.Transparent, elevation = 0.dp) {
             Text(text = "Movies")
         }
     }) {
