@@ -1,5 +1,6 @@
 package com.ruiter.composemovieapp
 
+import Movie
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -35,36 +36,6 @@ class MainActivity : ComponentActivity() {
 fun MyApp(content: @Composable () -> Unit) {
     ComposeMovieAppTheme {
         content()
-    }
-}
-
-@Composable
-fun MovieRow(movie: String, onItemClick: (String) -> Unit) {
-    Card(
-        modifier = Modifier
-            .padding(8.dp)
-            .fillMaxWidth()
-            .height(100.dp)
-            .clickable {
-                onItemClick(movie)
-            },
-        elevation = 4.dp
-    ) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Start
-        ) {
-            Surface(
-                modifier = Modifier
-                    .padding(12.dp)
-                    .size(100.dp),
-                elevation = 4.dp
-            ) {
-                Icon(imageVector = Icons.Default.AccountBox, contentDescription = "Movie Image")
-            }
-
-            Text(text = movie)
-        }
     }
 }
 

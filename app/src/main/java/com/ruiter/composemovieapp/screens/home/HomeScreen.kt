@@ -1,5 +1,6 @@
 package com.ruiter.composemovieapp.screens.home
 
+import Movie
 import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,8 +12,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.ruiter.composemovieapp.MovieRow
 import com.ruiter.composemovieapp.navigation.MovieScreens
+import com.ruiter.composemovieapp.widgets.MovieRow
+import getMovies
 
 @Composable
 fun HomeScreen(navController: NavController) {
@@ -28,19 +30,7 @@ fun HomeScreen(navController: NavController) {
 @Composable
 fun MainContent(
     navController: NavController,
-    movieList: List<String> = listOf(
-        "Avatar",
-        "300",
-        "Matrix",
-        "Star wars",
-        "Avangers",
-        "Iron Man",
-        "Altered Carbon",
-        "Spider Man",
-        "Captain America",
-        "Harry Potter",
-        "Life"
-    )
+    movieList: List<Movie> = getMovies()
 ) {
     Column() {
         LazyColumn {
