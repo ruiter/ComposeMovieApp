@@ -1,6 +1,7 @@
 package com.ruiter.composemovieapp.widgets
 
 import Movie
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -8,10 +9,12 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
-import androidx.compose.runtime.Composable
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -28,6 +31,10 @@ import getMovies
 @Preview
 @Composable
 fun MovieRow(movie: Movie = getMovies()[0], onItemClick: (String) -> Unit = {}) {
+    var expanded by remember {
+        mutableStateOf(false)
+    }
+
     Card(
         modifier = Modifier
             .padding(8.dp)
@@ -64,6 +71,24 @@ fun MovieRow(movie: Movie = getMovies()[0], onItemClick: (String) -> Unit = {}) 
                 Text(text = movie.title, style = MaterialTheme.typography.h6)
                 Text(text = "Director: ${movie.director}", style = MaterialTheme.typography.caption)
                 Text(text = "Year: ${movie.year}", style = MaterialTheme.typography.caption)
+
+                AnimatedVisibility(visible = expanded) {
+                    // hidden info
+                    Column() {
+                        Text(text = "hello there")
+                    }
+                }
+
+                Icon(
+                    imageVector = Icons.Filled.KeyboardArrowDown,
+                    contentDescription = "Down Arrow",
+                    modifier = Modifier
+                        .size(25.dp)
+                        .clickable {
+                            expanded = !expanded
+                        },
+                    tint = Color.DarkGray
+                )
             }
         }
     }
