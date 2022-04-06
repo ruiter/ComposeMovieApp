@@ -10,6 +10,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -19,8 +20,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.compose.rememberImagePainter
 import coil.request.ImageRequest
@@ -39,7 +45,7 @@ fun MovieRow(movie: Movie = getMovies()[0], onItemClick: (String) -> Unit = {}) 
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth()
-            .height(100.dp)
+            //.height(100.dp)
             .clickable {
                 onItemClick(movie.id.toString())
             },
@@ -75,12 +81,26 @@ fun MovieRow(movie: Movie = getMovies()[0], onItemClick: (String) -> Unit = {}) 
                 AnimatedVisibility(visible = expanded) {
                     // hidden info
                     Column() {
-                        Text(text = "hello there")
+                        Text(buildAnnotatedString {
+                            withStyle(style = SpanStyle(color = Color.DarkGray, fontSize = 13.sp)) {
+                                append("Plot: ")
+                            }
+
+                            withStyle(
+                                style = SpanStyle(
+                                    color = Color.DarkGray,
+                                    fontSize = 13.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            ) {
+                                append(movie.plot)
+                            }
+                        })
                     }
                 }
 
                 Icon(
-                    imageVector = Icons.Filled.KeyboardArrowDown,
+                    imageVector = if (expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown,
                     contentDescription = "Down Arrow",
                     modifier = Modifier
                         .size(25.dp)
